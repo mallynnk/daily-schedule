@@ -43,16 +43,25 @@ $("#row8").val(localStorage.getItem("row5"));
 
 
 
-
-
- // STOP building Time box portion of row
-
-
 //color code time blocks based on past, present or future (in day)
+for (var i = 1; i <= 12; i++) {
+    var inputTime = $("#" + i + "Row").attr("data-time");
+    var inputTimeInt = parseInt(inputTime);
+    console.log(currentTimeInt);
+
+ if (currentTimeInt === inputTimeInt) {
+     $("#" + i + "Row").addClass("present");
+ }
+
+if (currentTimeInt > inputTimeInt) {
+    $("#" + i + "Row").addClass("past");
+ }
+
+ if (currentTimeInt > inputTimeInt) {
+    $("#" + i + "Row").addClass("future");
+ }
+}
 
 
-//ability to enter event in time blocks
-
-//when click "save" for a time block. text is saved to localStorage
 
 //when i refresh, tasks are saved
