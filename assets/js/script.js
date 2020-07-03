@@ -1,77 +1,45 @@
 var events = JSON.parse(localStorage.getItem("eventsList")) || [];
+var currentTimeInt = moment().hour();
+var saveBtn = $(".saveBtn");
+
 
 // display current date at top of page
-const now  = moment().format("MMMM Do YYYY");
+const now  = moment().format("dddd MMMM Do YYYY");
 $("#currentDay").text(now)
 
-
-function renderevents(events) {
-    //empties out the html
-    $("events-to-add").empty();
-
-    // Iterates over the 'list'
-    for (var i = 0; i < events.length; i++) {
-    // Creates a new variable 'toDoItem' that will hold a "<p>" tag
-    // Sets the `list` item's value as text of this <p> element
-    var addedevent = $("<p>");
-    addedevent.text(events[i]);
-
-    // Creates a button `toDoClose` with an attribute called `data-to-do` and a unique `id`
-    var eventSave = $('saveBtn');
-    eventSave.attr('saveB', i);
-
-    addedevent = addevent.prepend(eventSave)
-
-    // Adds 'toDoItem' to the To-Do List div
-    $('#events-to-add').append(addedevent);
+// Set data attributes to each hour input element
+$("#row8").attr("data-time", moment("9:00am", "h:mm a").format("HH"));
+$("#row9").attr("data-time", moment("9:00am", "h:mm a").format("HH"));
+$("#row10").attr("data-time", moment("10:00am", "h:mm a").format("HH"));
+$("#row11").attr("data-time", moment("11:00am", "h:mm a").format("HH"));
+$("#row12").attr("data-time", moment("12:00pm", "h:mm a").format("HH"));
+$("#row1").attr("data-time", moment("1:00pm", "h:mm a").format("HH"));
+$("#row2").attr("data-time", moment("2:00pm", "h:mm a").format("HH"));
+$("#row3").attr("data-time", moment("3:00pm", "h:mm a").format("HH"));
+$("#row4").attr("data-time", moment("4:00pm", "h:mm a").format("HH"));
+$("#row5").attr("data-time", moment("5:00pm", "h:mm a").format("HH"));
 
 
-}
-};
+// save user input to localStorage
+$(".saveBtn").on("click",function() {
+    var eventInput = $(this).siblings("textarea").val().trim();
+    console.log($(this).siblings("textarea").attr("id"));
 
-renderevents(events)
+    var hour = $(this).siblings("textarea").attr("id");
+    localStorage.setItem(hour, eventInput);
+})
 
-
-    $('#addevent').on('click', function(events) {
-        events.preventDefault();
-
-      // Get the to-do "value" from the textbox and store it as a variable using `.val()` and `.trim()`
-        var addedevent = $("#textarea").val().trim()
-        console.log(addedevent)
-
-        // Add the new to-do to our local 'list' variable
-        events.push(addedevent)
-       
-
-        // Update the to-dos on the page
-        renderevents(events);
-
-        // Save the to-dos into localStorage
-        var eventsString = JSON.stringify(events)
-        localStorage.setItem("eventsList", eventsString) 
-
-        // Clear the textbox when done using `.val()`
-        $("#textarea").val("")
-      });
-
-      $("saveBtn").on('click', function() {
-        // Get the `id` of the button from its data attribute and hold in a variable called 'toDoNumber'
-        var saveevent = $(this).attr("");
-
-        // Delete the to-do with that `id` from our local `list` using `.splice()`
-        events.splice(saveevent, 1);
-        //
-        // Update the to-dos on the page
-        renderevents(events);
-
-        // Save the to-dos into localStorage
-        // We need to use JSON.stringify to turn the list from an array into a string
-        var eventString = JSON.stringify(events)
-        localStorage.setItem("eventsList", eventsString);
-        //
-      });
-
-
+// Set data attributes to each hour input element
+$("#row8").val(localStorage.getItem("row8"));
+$("#row8").val(localStorage.getItem("row9"));
+$("#row8").val(localStorage.getItem("row10"));
+$("#row8").val(localStorage.getItem("row11"));
+$("#row8").val(localStorage.getItem("row12"));
+$("#row8").val(localStorage.getItem("row1"));
+$("#row8").val(localStorage.getItem("row2"));
+$("#row8").val(localStorage.getItem("row3"));
+$("#row8").val(localStorage.getItem("row4"));
+$("#row8").val(localStorage.getItem("row5"));
 
 
 
