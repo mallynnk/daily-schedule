@@ -1,4 +1,3 @@
-var events = JSON.parse(localStorage.getItem("eventsList")) || [];
 var currentTimeInt = moment().hour();
 var saveBtn = $(".saveBtn");
 
@@ -21,47 +20,61 @@ $("#row5").attr("data-time", moment("5:00pm", "h:mm a").format("HH"));
 
 
 // save user input to localStorage
-$(".saveBtn").on("click",function() {
+$(".saveBtn").on("click", function() {
     var eventInput = $(this).siblings("textarea").val().trim();
-    console.log($(this).siblings("textarea").attr("id"));
-
     var hour = $(this).siblings("textarea").attr("id");
-    localStorage.setItem(hour, eventInput);
+    localStorage.setItem(hour, eventInput);         
 })
 
-// Set data attributes to each hour input element
-$("#row8").val(localStorage.getItem("row8"));
-$("#row8").val(localStorage.getItem("row9"));
-$("#row8").val(localStorage.getItem("row10"));
-$("#row8").val(localStorage.getItem("row11"));
-$("#row8").val(localStorage.getItem("row12"));
-$("#row8").val(localStorage.getItem("row1"));
-$("#row8").val(localStorage.getItem("row2"));
-$("#row8").val(localStorage.getItem("row3"));
-$("#row8").val(localStorage.getItem("row4"));
-$("#row8").val(localStorage.getItem("row5"));
 
+$("#row8").val(localStorage.getItem("row8"));
+$("#row9").val(localStorage.getItem("row9"));
+$("#row10").val(localStorage.getItem("row10"));
+$("#row11").val(localStorage.getItem("row11"));
+$("#row12").val(localStorage.getItem("row12"));
+$("#row1").val(localStorage.getItem("row1"));
+$("#row2").val(localStorage.getItem("row2"));
+$("#row3").val(localStorage.getItem("row3"));
+$("#row4").val(localStorage.getItem("row4"));
+$("#row5").val(localStorage.getItem("row5"));
 
 
 //color code time blocks based on past, present or future (in day)
+// for (var i = 1; i <= 12; i++) {
+//     var inputTime = $("#" + i + "row").attr("data-time");
+//     var inputTimeInt = parseInt(inputTime);
+//     console.log(currentTimeInt);
+
+//  if (currentTimeInt === inputTimeInt) {
+//      $("#" + i + "row").addClass("present");
+//  }
+
+// if (currentTimeInt > inputTimeInt) {
+//     $("#" + i + "row").addClass("past");
+//  }
+
+//  if (currentTimeInt > inputTimeInt) {
+//     $("#" + i + "row").addClass("future");
+//  }
+// }
+
 for (var i = 1; i <= 12; i++) {
-    var inputTime = $("#" + i + "Row").attr("data-time");
+    var inputTime = $("#" + "row" + i).attr("data-time");
     var inputTimeInt = parseInt(inputTime);
     console.log(currentTimeInt);
 
- if (currentTimeInt === inputTimeInt) {
-     $("#" + i + "Row").addClass("present");
- }
+    if (currentTimeInt === inputTimeInt) {
+        $("#" + "row" + i).removeClass("");
+        $("#" + "row" + i).addClass("present");
+    }
 
-if (currentTimeInt > inputTimeInt) {
-    $("#" + i + "Row").addClass("past");
- }
-
- if (currentTimeInt > inputTimeInt) {
-    $("#" + i + "Row").addClass("future");
- }
+    if (currentTimeInt > inputTimeInt) {
+        $("#" + "row" + i).removeClass("");
+        $("#" + "row" + i).addClass("past");
+    }
+    if (currentTimeInt > inputTimeInt) {
+        $("#" + "row" + i).removeClass("");
+        $("#" + "row" + i).addClass("future");
+    }
 }
 
-
-
-//when i refresh, tasks are saved
