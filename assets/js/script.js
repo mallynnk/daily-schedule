@@ -3,7 +3,7 @@ var saveBtn = $(".saveBtn");
 
 
 // display current date at top of page
-const now  = moment().format("dddd MMMM Do YYYY");
+const now  = moment().format("dddd, MMMM Do, YYYY");
 $("#currentDay").text(now)
 
 // Set data attributes to each hour input element
@@ -26,7 +26,7 @@ $(".saveBtn").on("click", function() {
     localStorage.setItem(hour, eventInput);         
 })
 
-
+//retrieve data form local storage & present on the page
 $("#row8").val(localStorage.getItem("row8"));
 $("#row9").val(localStorage.getItem("row9"));
 $("#row10").val(localStorage.getItem("row10"));
@@ -39,25 +39,7 @@ $("#row4").val(localStorage.getItem("row4"));
 $("#row5").val(localStorage.getItem("row5"));
 
 
-//color code time blocks based on past, present or future (in day)
-// for (var i = 1; i <= 12; i++) {
-//     var inputTime = $("#" + i + "row").attr("data-time");
-//     var inputTimeInt = parseInt(inputTime);
-//     console.log(currentTimeInt);
-
-//  if (currentTimeInt === inputTimeInt) {
-//      $("#" + i + "row").addClass("present");
-//  }
-
-// if (currentTimeInt > inputTimeInt) {
-//     $("#" + i + "row").addClass("past");
-//  }
-
-//  if (currentTimeInt > inputTimeInt) {
-//     $("#" + i + "row").addClass("future");
-//  }
-// }
-
+// set past, present and future colors to track the current time, what events have passed and which are in the future
 for (var i = 1; i <= 12; i++) {
     var inputTime = $("#" + "row" + i).attr("data-time");
     var inputTimeInt = parseInt(inputTime);
@@ -72,7 +54,7 @@ for (var i = 1; i <= 12; i++) {
         $("#" + "row" + i).removeClass("");
         $("#" + "row" + i).addClass("past");
     }
-    if (currentTimeInt > inputTimeInt) {
+    if (currentTimeInt < inputTimeInt) {
         $("#" + "row" + i).removeClass("");
         $("#" + "row" + i).addClass("future");
     }
